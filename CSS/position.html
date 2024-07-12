@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        .box{
+            height: 500px;
+            width: 500px;
+            background-color: lightgray;
+           
+        }
+
+        .child{
+            height: 100px;
+            width: 100px;
+          
+        }
+
+        #static{
+            background-color: lightcoral;
+        }
+
+        #relative{
+            background-color: lightgreen;
+            /* position: relative;
+            left: 100px;
+            top: 100px; */
+        }
+
+        #absolute{
+            background-color: lightseagreen;
+            /* position : absolute;
+            left: 100px;
+            top:100px */
+        }
+
+        #fixed{
+            background-color: lightsteelblue;
+            /* position: fixed; */
+            /* top: 100px;
+            left: 100px; */
+            /* position: absolute;
+            z-index: -1; */
+        } 
+
+        #sticky{
+            background-color: lightcoral;
+            position: sticky;
+            left: 100px;
+            top: 250px;
+        }  
+        
+        .box2{
+            height: 300vh;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="child" id="static">1</div>
+        <div class="child" id="relative">2</div>
+        <div class="child" id="sticky">Sticky </div>
+        <div class="child" id="absolute">3</div>
+        <div class="child" id="fixed">4</div>
+       
+    </div>
+
+    <div class="box2" ></div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* .GrandParent .child{
+            color : red ;
+        } */
+        .child+.childnew {
+            color: blue ;
+        }
+        .child+.child{
+            color : green
+        }
+        .child~.child{
+            color : red;
+        }
+    </style>
+</head>
+<body>
+    <div class="GrandParent">
+        <div class="child"> I am inside Grand parent </div>
+        <div class="parent">
+        <div class="child"> child 1</div>
+        <div class="child">child 2 </div>
+        <div class="child">child 2 </div>
+        <div class="childnew">Child new </div>
+    </div>
+    <div class="child">child 2 </div>
+    </div>
+</body>
+</html>
