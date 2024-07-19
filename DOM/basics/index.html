@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        h1{
+        /* h1{
             color : red ;
         }
 
@@ -17,6 +17,42 @@
             background: red;
             height: 200px ;
             width: 200px ;
+        } */
+
+        .cont{
+            width: 50vw;
+            height: 30vh ;
+            background-color: grey;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .box{
+            height: 50%;
+            width: 20%;
+        }
+
+        .red{
+            background-color: red;
+        }
+
+        .green {
+            background-color: green;
+        }
+
+        .blue{
+            background-color: blue;
+        }
+
+        .yellow {
+            background-color: yellow;
+        }
+
+        .box{
+            border: 2px  solid red ;
+            height: 100px ;
+            width: 100px ;
         }
 
     </style>
@@ -32,7 +68,7 @@
 
     -->
 
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJA32WU4rBpx7maglqeEtt3ot1tPIRWptxA&s" alt="">
+    <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJA32WU4rBpx7maglqeEtt3ot1tPIRWptxA&s" alt="">
 
     <div class="box">
 
@@ -40,7 +76,26 @@
 
     <div class="cont">
        
+    </div> -->
+<!-- 
+    <div class="cont">
+        <div class="box red"></div>
+        <div class="box blue"></div>
+        <div class="box green "></div>
+        <div class="box yellow "></div>
+    </div> -->
+
+    <div class="box gp">
+        gp 
+        <div class="box parent">
+            parent
+            <div class="box child">
+                child 
+            </div>
+        </div>
     </div>
+
+
 </body>
 <script src="./script.js"></script>;
 </html>
