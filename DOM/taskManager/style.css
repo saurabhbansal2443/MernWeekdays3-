@@ -102,10 +102,17 @@ body{
    left: 30vw;
    top: 20vh;
    z-index: 20;
+  
 }
 .textPart{
     height: 75%;
-    width: 100%;   
+    width: 100%;
+    resize: none;   
+    outline : none ;
+    border: none ;
+    background-color: transparent;
+    font-size: 2rem ;
+    padding:2% ;
 }
 
 .ticketPriority{
@@ -144,4 +151,8 @@ body{
     right: 5%;
     bottom: 5%;
     
+}
+
+.noDisplay{
+    display: none;
 }
