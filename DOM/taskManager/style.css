@@ -156,3 +156,7 @@ body{
 .noDisplay{
     display: none;
 }
+
+.editTask{
+    word-break: break-all;
+}
