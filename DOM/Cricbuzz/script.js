@@ -5,6 +5,7 @@ let dropdown = document.querySelector("select");
 let cont = document.querySelector(".cont");
 
 addBtn.addEventListener("click", function () {
+  console.log( " Btn is clicked ")
   let n = inputbar.value;
   let color = colorBar.value;
   let shape = dropdown.value;
@@ -22,3 +23,5 @@ addBtn.addEventListener("click", function () {
     cont.appendChild(div);
   }
 });
+
+console.log( " Script is ended ")
