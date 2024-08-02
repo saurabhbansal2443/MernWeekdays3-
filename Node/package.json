@@ -1,0 +1,15 @@
+{
+  "name": "basics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "fileOne.js",
+  "type": "module",
+  "scripts": {
+    "start" : "node fileOne.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "text-to-speech-converter": "^1.2.0"
+  }
+}
