@@ -1,26 +1,22 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import useProductData from "../useProductData";
+import Comment from "./Comment";
 
 const ProductPage = () => {
-  let [data, setData] = useState(null);
+  
   const { id } = useParams();
 
-  let productData = async () => {
-    let data = await fetch(`https://dummyjson.com/products/${id}`);
-    let productData = await data.json();
-    setData(productData);
-  };
+  let data = useProductData(id);
 
-  useEffect(() => {
-    productData();
-  }, []);
-
+  
   if (data == null) {
     return <div> ....loading </div>;
   }
-  let { thumbnail, title, price, category, rating, brand } = data;
+  let { thumbnail, title, price, category, rating, brand  , reviews} = data;
 
   return (
+    <div className="w-screen h-screen ">
     <div>
       <div className="card card-side bg-base-100 shadow-xl">
         <figure>
@@ -34,6 +30,16 @@ const ProductPage = () => {
           </div>
         </div>
       </div>
+    </div>
+
+    <div className="bg-white w-3/4 h-1/2  mx-auto my-2 "> 
+    {
+      reviews.map((review)=>{
+        return <Comment review={review} ></Comment>
+      })
+    }
+    </div>
+
     </div>
   );
 };
