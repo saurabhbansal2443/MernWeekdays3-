@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , useContext } from "react";
 import Card from "./Card.jsx";
 import ShimmerUI from "./ShimmerUI.jsx";
-import {Link} from "react-router-dom"
+import { ThemeStore } from "./ThemeContext.jsx";
 
 const Home = () => {
   const [allProducts, setAllProducts] = useState(null);
   const [products, setProducts] = useState(null);
   const [query, setQuery] = useState("");
 
+  const {theme , setTheme} = useContext(ThemeStore);
+ 
   let handleTopRated = () => {
     let filteredData = allProducts.filter((obj) => {
       return obj.rating > 4;
@@ -41,7 +43,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="bg-black ">
+    <div className= { theme == "light" ? "bg-slate-300" : "bg-dark"}>
       <div className="flex justify-around items-center  w-full h-16 ">
         <button onClick={handleTopRated} className="btn btn-active btn-accent">
           {" "}
@@ -97,7 +99,7 @@ const Home = () => {
           <ShimmerUI></ShimmerUI>
         ) : (
           products.map((obj, idx) => {
-            return <Link key={obj.id} to={`/product/${obj.id}`}><Card  productObj={obj}></Card></Link>;
+            return <Card key={obj.id}  productObj={obj}></Card>;
           })
         )}
       </div>

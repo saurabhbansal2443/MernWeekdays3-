@@ -8,6 +8,7 @@ import Cart from './Components/Cart.jsx'
 import Home from './Components/Home.jsx'
 import ProductPage from './Components/ProductPage.jsx'
 import ErrorPage from './Components/ErrorPage.jsx'
+import ThemeContext from './Components/ThemeContext.jsx'
 let Food= lazy(()=> import ( './Components/Food.jsx' ) )
 
 const AppRouter = createBrowserRouter([
@@ -41,7 +42,9 @@ const AppRouter = createBrowserRouter([
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
+    <ThemeContext>
   <RouterProvider router={AppRouter}></RouterProvider>
+  </ThemeContext>
    
   
 )
