@@ -31,9 +31,34 @@ const CartSlice = createSlice({
       );
       state.cart.splice(existingProductIdx, 1);
     },
-    QunatityIncrease: () => {},
-    QunatityDecrese: () => {},
-    clearCart: () => {},
+    QunatityIncrease: (state, action) => {
+      // id
+      let pid = action.payload;
+      let existingProductIdx = state.cart.findIndex(
+        (cartObj) => cartObj.data.id === pid
+      );
+
+      let existingProduct = state.cart[existingProductIdx];
+      existingProduct.quantity = existingProduct.quantity + 1;
+    },
+    QunatityDecrese: (state, action) => {
+      //id
+      let pid = action.payload;
+      let existingProductIdx = state.cart.findIndex(
+        (cartObj) => cartObj.data.id === pid
+      );
+
+      let existingProduct = state.cart[existingProductIdx];
+
+      if (existingProduct.quantity > 1) {
+        existingProduct.quantity = existingProduct.quantity - 1;
+      } else {
+        state.cart.splice(existingProductIdx, 1);
+      }
+    },
+    clearCart: (state , action ) => {
+        state.cart.length = 0 ;
+    },
   },
 });
 

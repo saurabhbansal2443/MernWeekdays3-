@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { useParams } from "react-router-dom";
 import useProductData from "../useProductData";
 import Comment from "./Comment";
+import { useDispatch } from "react-redux";
+import { addCart } from "../Store/CartSlice";
 
 const ProductPage = () => {
   const { id } = useParams();
   const [openIdx, setOpenIdx] = useState(null);
 
   let data = useProductData(id);
+  let dispatch = useDispatch(); 
 
   if (data == null) {
     return <div> ....loading </div>;
@@ -25,7 +28,7 @@ const ProductPage = () => {
             <h2 className="card-title">{title}</h2>
             <p>Click the button to watch on Jetflix app.</p>
             <div className="card-actions justify-end">
-              <button className="btn btn-primary"> Add to cart </button>
+              <button className="btn btn-primary" onClick={()=> dispatch(addCart(data))}> Add to cart </button>
             </div>
           </div>
         </div>
