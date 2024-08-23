@@ -9,6 +9,8 @@ import Home from './Components/Home.jsx'
 import ProductPage from './Components/ProductPage.jsx'
 import ErrorPage from './Components/ErrorPage.jsx'
 import ThemeContext from './Components/ThemeContext.jsx'
+import AppStore from './Store/Store.js';
+import {Provider} from "react-redux";
 let Food= lazy(()=> import ( './Components/Food.jsx' ) )
 
 const AppRouter = createBrowserRouter([
@@ -42,9 +44,11 @@ const AppRouter = createBrowserRouter([
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
+    <Provider store={AppStore}>
     <ThemeContext>
   <RouterProvider router={AppRouter}></RouterProvider>
   </ThemeContext>
+  </Provider>
    
   
 )

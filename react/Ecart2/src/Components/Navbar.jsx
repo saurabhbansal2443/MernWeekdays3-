@@ -1,9 +1,14 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { ThemeStore } from "./ThemeContext";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const { theme, setTheme } = useContext(ThemeStore);
+
+  const cartData = useSelector((store)=> store.cart.cart);
+
+  // console.log( cartData)
 
   let lightTheme = "navbar bg-white text-black text-2xl";
   let darkTheme = "navbar bg-gray-700 text-primary-content text-2xl";
@@ -35,7 +40,7 @@ const Navbar = () => {
           <li>
             <Link to="/cart" className="text-2xl ">
               {" "}
-              Cart{" "}
+              Cart<sup> {cartData.length} </sup>
             </Link>
           </li>
           <li>

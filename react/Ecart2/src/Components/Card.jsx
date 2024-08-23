@@ -1,9 +1,11 @@
 import React , {useContext} from "react";
 import {useNavigate} from 'react-router-dom'
 import { ThemeStore } from "./ThemeContext";
+import { addCart } from "../Store/CartSlice";
+import { useDispatch } from "react-redux";
 
 const Card = ({ productObj }) => {
-  
+  let dispatch = useDispatch();
   let { title, category, price, thumbnail , rating , id  } = productObj;
 
   let {theme } = useContext(ThemeStore);
@@ -16,7 +18,7 @@ const Card = ({ productObj }) => {
 
   let handleAddCart = (event) => {
     event.stopPropagation()
-    console.log( " Adding to cart ")
+    dispatch(addCart(productObj))
   }  
 let darkTheme = "card bg-slate-600 w-96 shadow-xl m-4"
 let lightTheme = "card bg-gray-400 w-96 shadow-xl m-4 text-black "
