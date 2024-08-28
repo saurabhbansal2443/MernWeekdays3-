@@ -56,8 +56,26 @@ const CartSlice = createSlice({
         state.cart.splice(existingProductIdx, 1);
       }
     },
-    clearCart: (state , action ) => {
-        state.cart.length = 0 ;
+    clearCart: (state) => {
+      state.cart.length = 0;
+    },
+    AscendingRating: (state) => {
+      let cartItems = state.cart;
+
+      cartItems.sort((a, b) => {
+        return a.data.rating - b.data.rating;
+      });
+
+      state.cart = cartItems;
+    },
+    DesecndingRating: (state) => {
+      let cartItems = state.cart;
+
+      cartItems.sort((a, b) => {
+        return b.data.rating - a.data.rating;
+      });
+
+      state.cart = cartItems;
     },
   },
 });
@@ -68,6 +86,8 @@ export const {
   QunatityIncrease,
   QunatityDecrese,
   clearCart,
+  AscendingRating,
+  DesecndingRating
 } = CartSlice.actions;
 
 export default CartSlice.reducer;

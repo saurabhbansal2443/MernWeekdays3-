@@ -2,6 +2,8 @@ import React, { useEffect, useState , useContext } from "react";
 import Card from "./Card.jsx";
 import ShimmerUI from "./ShimmerUI.jsx";
 import { ThemeStore } from "./ThemeContext.jsx";
+import AddedCartCard from "./AddedCartCard.jsx";
+import { useSelector } from "react-redux";
 
 const Home = () => {
   const [allProducts, setAllProducts] = useState(null);
@@ -9,6 +11,8 @@ const Home = () => {
   const [query, setQuery] = useState("");
 
   const {theme , setTheme} = useContext(ThemeStore);
+
+  let cartItems = useSelector((store)=> store.cart.cart )
  
   let handleTopRated = () => {
     let filteredData = allProducts.filter((obj) => {
@@ -41,6 +45,15 @@ const Home = () => {
   useEffect(() => {
     getdata();
   }, []);
+
+  let AddedCart = AddedCartCard(Card)
+
+  let inCart = (id)=>{
+     let idx = cartItems.findIndex((cartObj)=> cartObj.data.id == id );
+
+     if( idx == -1 ) return false ;
+     return true ;
+  }
 
   return (
     <div className= { theme == "light" ? "bg-slate-300" : "bg-dark"}>
@@ -99,7 +112,7 @@ const Home = () => {
           <ShimmerUI></ShimmerUI>
         ) : (
           products.map((obj, idx) => {
-            return <Card key={obj.id}  productObj={obj}></Card>;
+            return inCart(obj.id) == true ?  <AddedCart key={obj.id}  productObj={obj}></AddedCart>: <Card key={obj.id}  productObj={obj}></Card>
           })
         )}
       </div>

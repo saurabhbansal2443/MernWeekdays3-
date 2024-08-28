@@ -1,7 +1,7 @@
 import React from "react";
 import CartRow from "./CartRow";
 import { useSelector , useDispatch } from "react-redux";
-import { clearCart } from "../Store/CartSlice";
+import { clearCart , AscendingRating , DesecndingRating } from "../Store/CartSlice";
 
 
 const Cart = () => {
@@ -15,7 +15,7 @@ const Cart = () => {
         <thead>
           <tr className="text-2xl">
             <th> Image </th>
-            <th> <span>🔼</span> Rating <span> 🔽 </span></th>
+            <th> <span onClick={()=> { dispatch(AscendingRating())}}>🔼</span> Rating <span onClick={()=> { dispatch(DesecndingRating())}}> 🔽 </span></th>
             <th>Price </th>
             <th>Quantity </th>
             <th> </th>

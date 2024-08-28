@@ -2,12 +2,27 @@ import {  useState } from "react";
 import { useParams } from "react-router-dom";
 import useProductData from "../useProductData";
 import Comment from "./Comment";
-import { useDispatch } from "react-redux";
+import { useDispatch , useSelector } from "react-redux";
 import { addCart } from "../Store/CartSlice";
 
 const ProductPage = () => {
   const { id } = useParams();
   const [openIdx, setOpenIdx] = useState(null);
+
+  let cartData = useSelector((store)=> store.cart.cart);
+
+
+  let inCart = ()=>{
+    let idx = cartData.findIndex((cartObj)=>{
+      return cartObj.data.id == id;
+    })
+   console.log( idx )
+    if(idx === -1){
+      return false ;
+    }else{
+      return true ;
+    }
+  }
 
   let data = useProductData(id);
   let dispatch = useDispatch(); 
@@ -18,7 +33,8 @@ const ProductPage = () => {
   let { thumbnail, title, price, category, rating, brand, reviews } = data;
 
   return (
-    <div className="w-screen h-screen ">
+    <div className="w-screen h-screen relative ">
+     { inCart()== true ?  <div className=" bg-orange-500 rounded-2xl    absolute z-30 text-black p-3 font-bold left-8 top-5 "> Added to cart </div> : null }
       <div>
         <div className="card card-side bg-base-100 shadow-xl">
           <figure>
