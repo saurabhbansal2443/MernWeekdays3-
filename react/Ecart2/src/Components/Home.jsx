@@ -111,7 +111,7 @@ const Home = () => {
         {products == null ? (
           <ShimmerUI></ShimmerUI>
         ) : (
-          products.map((obj, idx) => {
+          products.map((obj) => {
             return inCart(obj.id) == true ?  <AddedCart key={obj.id}  productObj={obj}></AddedCart>: <Card key={obj.id}  productObj={obj}></Card>
           })
         )}

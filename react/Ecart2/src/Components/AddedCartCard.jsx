@@ -1,5 +1,7 @@
 import React from 'react'
 
+// This is a higher order component 
+
 const AddedCartCard = (Component) => {
   return (props)=>{
     return (
