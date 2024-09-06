@@ -13,12 +13,12 @@ import {
 let Router = express.Router() ;
 
 
-Router.get("/products/search/:search?", searchController)
-.get("/products", allProducts)
-.get("/products/:id", productByID)
-.post("/products", createProduct)
-.patch("/products/:id", updateProduct)
-.put("/products/:id", replaceProduct)
-.delete("/products/:id", deleteProduct);
+Router.get("/search/:search?", searchController)
+.get("/", allProducts)
+.get("/:id", productByID)
+.post("/", createProduct)
+.patch("/:id", updateProduct)
+.put("/:id", replaceProduct)
+.delete("/:id", deleteProduct);
 
 export default Router ;
