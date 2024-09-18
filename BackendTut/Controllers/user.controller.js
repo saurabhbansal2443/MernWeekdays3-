@@ -6,7 +6,7 @@ import User from "../Models/user.model.js"
     
   }
   let getUser = (req, res) => {
-
+    res.send({data : "data is "})
   }
 
   let updateUser = (req, res)=> {}
@@ -14,16 +14,6 @@ import User from "../Models/user.model.js"
   let replaceUser = (req, res) => {}  
 
   let signup = async (req, res) => {  // CreateUser 
-     let data  = req.body ;  //{email , username , apssword }
-    try{
-     let newUser = new User( data  ); // documnet create 
-
-     let dataBaseUser =await  newUser.save();
-
-     res.status(201).json ( dataBaseUser)
-    }catch(err){
-      res.status(500).send(err.message )
-    }
   }
 
   let login = (req, res) => {}  
