@@ -1,0 +1,21 @@
+{
+  "name": "backendecommerce",
+  "version": "1.0.0",
+  "description": "backend for react ecommerce ",
+  "main": "index.js",
+  "type"  :"module",
+  "scripts": {
+     "start" : "node index.js",
+     "dev" :"nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "express": "^4.21.0",
+    "mongoose": "^8.6.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.5"
+  }
+}
