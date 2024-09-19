@@ -1,9 +1,7 @@
 import mongoose from "mongoose";
 
 async function connectDB() {
-  await mongoose.connect(
-    "mongodb+srv://saurabhbansal:saurabh123@cluster0.fbuui.mongodb.net/"
-  );
+  await mongoose.connect(process.env.MONGODB_URI);
 }
 
 export default connectDB;
