@@ -68,16 +68,68 @@ let login = async (req, res) => {
 };
 
 let getUser = (req, res) => {
-    res.send({message : "hello"})
+    if(!req?.user ){
+      return res.send({result : false , message : 'not authenticated ' })
+    }else{
+      return res.send({result : true , message : "user " , data : req.user })
+    }
 };
 
-let updateUser = (req, res) => {};
+let updateUser = async (req, res) => {
+  if(!req?.user ){
+    return res.send({result : false , message : 'not authenticated ' })
+  }else{
+    try{
+      let userData = req.user ; 
+      let data = req.body ; 
+      let updatedData = await User.findByIdAndUpdate( userData._id , data , {new : true } );
+      return res.send({result : true , message : "user updated succesfully " , data : updatedData })
+    }catch(err){
+      return res.send({result : false  , message: err.message})
+    }
+  }
+};
 
-let replaceUser = (req, res) => {};
+let replaceUser =async  (req, res) => {
+  if(!req?.user ){
+    return res.send({result : false , message : 'not authenticated ' })
+  }else{
+    try{
+      let userData = req.user ; 
+      let data = req.body ; 
+      let replacedData = await User.findOneAndReplace( {_id : userData._id} , {...data , email : userData.email , password : userData.password} , {new : true } );
+      return res.send({result : true , message : "user replaced succesfully " , data : replacedData })
+    }catch(err){
+      return res.send({result : false  , message: err.message})
+    }
+  }
+};
 
-let deleteUser = (req, res) => {};
+let deleteUser = async (req, res) => {
+  if(!req?.user ){
+    return res.send({result : false , message : 'not authenticated ' })
+  }else{
+    try{
+      let userData = req.user ;
+      let deleteData = await User.findByIdAndDelete( userData._id );
+      return res.clearCookie("Token").send({result : true  , message : "Deleted and logout Sucessfully " , data : deleteData});
+    }catch(err){
+      return res.send({result : false  , message: err.message})
+    }
+  }
+};
 
-let logoutUser = (req, res) => {};
+let logoutUser = (req, res) => {
+  if(!req?.user ){
+    return res.send({result : false , message : 'not authenticated ' })
+  }else{
+    try{
+      return res.clearCookie("Token").send({result : true  , message : "logout Sucessfully "})
+    }catch(err){
+      return res.send({result : false  , message: err.message})
+    }
+  }
+};
 
 export {
   signup,
