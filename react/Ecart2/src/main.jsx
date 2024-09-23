@@ -10,6 +10,7 @@ import ProductPage from './Components/ProductPage.jsx'
 import ErrorPage from './Components/ErrorPage.jsx'
 import ThemeContext from './Components/ThemeContext.jsx'
 import AppStore from './Store/Store.js';
+import Login from './Components/Login.jsx'
 import {Provider} from "react-redux";
 let Food= lazy(()=> import ( './Components/Food.jsx' ) )
 
@@ -37,9 +38,12 @@ const AppRouter = createBrowserRouter([
             }, {
                 path : "/product/:id",
                 element : <ProductPage></ProductPage>
-            },
+            }
         ],
         errorElement : <ErrorPage></ErrorPage>
+    },{
+        path : "/login",
+        element: <Login></Login>
     }
 ])
 
