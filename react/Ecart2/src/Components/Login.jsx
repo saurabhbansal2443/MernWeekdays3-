@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import { signupSchema, loginSchema } from "../utility/ValidationSchema";
+import { baseUrl , signupUrl , loginUrl } from "../utility/Constant";
+import axios from 'axios';
 
 const Login = () => {
   const [isSignup, setIsSignup] = useState(true);
+  
 
   const formik = useFormik({
     initialValues: {
@@ -13,8 +16,14 @@ const Login = () => {
     },
     validationSchema: isSignup ? signupSchema : loginSchema,
 
-    onSubmit: (value , action ) => {
-      console.log(value);
+    onSubmit: async (value , action ) => {
+      // console.log( "valies" , value);
+      // signup //login 
+      let {userName , email  , password} = value ;  
+      let response = await axios.post ( baseUrl + signupUrl , { userName , email , password }) ;  
+
+      console.log( response)
+
       action.resetForm();
     },
   });
@@ -68,7 +77,7 @@ const Login = () => {
               Password:
             </label>
             <input
-              type="password"
+              type="password" 
               name="password"
               id="password"
               placeholder="Password"
@@ -77,6 +86,7 @@ const Login = () => {
               onBlur={formik.handleBlur}
               className="w-full border border-gray-300 py-2 pl-3 rounded mt-2 outline-none focus:ring-indigo-600 :ring-indigo-600"
             />
+            
           </div>
           {formik.touched.password && formik.errors.password ?<p className="text-red-700"> {formik.errors.password}  </p> : null }
           <button
