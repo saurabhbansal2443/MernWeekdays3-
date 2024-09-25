@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import { signupSchema, loginSchema } from "../utility/ValidationSchema";
-import { baseUrl , signupUrl , loginUrl } from "../utility/Constant";
-import axios from 'axios';
+import { baseUrl, signupUrl, loginUrl } from "../utility/Constant";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const [isSignup, setIsSignup] = useState(true);
-  
+  const [isError, setIsError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  let navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -16,13 +20,25 @@ const Login = () => {
     },
     validationSchema: isSignup ? signupSchema : loginSchema,
 
-    onSubmit: async (value , action ) => {
-      // console.log( "valies" , value);
-      // signup //login 
-      let {userName , email  , password} = value ;  
-      let response = await axios.post ( baseUrl + signupUrl , { userName , email , password }) ;  
+    onSubmit: async (value, action) => {
+      setIsLoading(true);
+      setIsError(false);
+      let { userName, email, password } = value;
+      let response = await axios.post(
+        isSignup ? baseUrl + signupUrl : baseUrl + loginUrl,
+        { userName, email, password },
+        { withCredentials: true }
+      );
 
-      console.log( response)
+      let resData = response.data;
+
+      console.log(resData);
+      setIsLoading(false);
+      if (resData.result == true) {
+        navigate("/");
+      } else {
+        setIsError(resData.message);
+      }
 
       action.resetForm();
     },
@@ -51,9 +67,10 @@ const Login = () => {
                 onBlur={formik.handleBlur}
                 className="w-full border border-gray-300 py-2 pl-3 rounded mt-2 outline-none focus:ring-indigo-600 :ring-indigo-600"
               />
-             {formik.touched.userName && formik.errors.userName ? <p className="text-red-700"> {formik.errors.userName}  </p> : null  }
+              {formik.touched.userName && formik.errors.userName ? (
+                <p className="text-red-700"> {formik.errors.userName} </p>
+              ) : null}
             </div>
-           
           ) : null}
           <div>
             <label htmlFor="email" className="block text-gray-800 font-bold">
@@ -69,7 +86,9 @@ const Login = () => {
               onBlur={formik.handleBlur}
               className="w-full border border-gray-300 py-2 pl-3 rounded mt-2 outline-none focus:ring-indigo-600 :ring-indigo-600"
             />
-           {formik.touched.email  && formik.errors.email?<p className="text-red-700"> {formik.errors.email}  </p> : null } 
+            {formik.touched.email && formik.errors.email ? (
+              <p className="text-red-700"> {formik.errors.email} </p>
+            ) : null}
             <label
               htmlFor="password"
               className="block text-gray-800 font-bold mt-4 "
@@ -77,7 +96,7 @@ const Login = () => {
               Password:
             </label>
             <input
-              type="password" 
+              type="password"
               name="password"
               id="password"
               placeholder="Password"
@@ -86,15 +105,26 @@ const Login = () => {
               onBlur={formik.handleBlur}
               className="w-full border border-gray-300 py-2 pl-3 rounded mt-2 outline-none focus:ring-indigo-600 :ring-indigo-600"
             />
-            
           </div>
-          {formik.touched.password && formik.errors.password ?<p className="text-red-700"> {formik.errors.password}  </p> : null }
+          {formik.touched.password && formik.errors.password ? (
+            <p className="text-red-700"> {formik.errors.password} </p>
+          ) : null}
           <button
             type="submit"
             className="cursor-pointer py-2 px-4 block mt-6 bg-indigo-500 text-white font-bold w-full text-center rounded"
           >
-            {isSignup ? "Signup " : "Login"}
+            {isLoading ? (
+              <span className="loading loading-spinner loading-md"></span>
+            ) : isSignup ? (
+              "Signup "
+            ) : (
+              "Login"
+            )}
           </button>
+          <p className="text-xl text-red-600 ">
+            {" "}
+            {isError != false ? isError : ""}
+          </p>
           <p className="text-black text-2xl mt-3 ">
             {" "}
             {isSignup

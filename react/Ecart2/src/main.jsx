@@ -12,12 +12,13 @@ import ThemeContext from './Components/ThemeContext.jsx'
 import AppStore from './Store/Store.js';
 import Login from './Components/Login.jsx'
 import {Provider} from "react-redux";
+import AuthWrapper from './Components/AuthWrapper.jsx'
 let Food= lazy(()=> import ( './Components/Food.jsx' ) )
 
 const AppRouter = createBrowserRouter([
     {
         path : "/",
-        element : <App></App>,
+        element : <AuthWrapper> <App></App> </AuthWrapper> ,
         children : [
             {
                 path : "/",
