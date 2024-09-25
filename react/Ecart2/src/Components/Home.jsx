@@ -13,7 +13,8 @@ const Home = () => {
   const {theme , setTheme} = useContext(ThemeStore);
 
   let cartItems = useSelector((store)=> store.cart.cart )
- 
+  let userData = useSelector((store)=> store.user )
+   console.log( userData) 
   let handleTopRated = () => {
     let filteredData = allProducts.filter((obj) => {
       return obj.rating > 4;

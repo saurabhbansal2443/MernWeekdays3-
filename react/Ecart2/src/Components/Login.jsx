@@ -3,12 +3,19 @@ import { useFormik } from "formik";
 import { signupSchema, loginSchema } from "../utility/ValidationSchema";
 import { baseUrl, signupUrl, loginUrl } from "../utility/Constant";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 const Login = () => {
   const [isSignup, setIsSignup] = useState(true);
   const [isError, setIsError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  let userData = useSelector((store)=> store.user);
+  
+  if(userData.user != null ){
+    navigate("/");
+  }
 
   let navigate = useNavigate();
 

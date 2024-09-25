@@ -1,12 +1,16 @@
 import React, { useState , useEffect  } from 'react';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../Store/UserSlice';
 import { baseUrl , getUrl } from '../utility/Constant';
 
 const AuthWrapper = ({children}) => {
 
     let [isUser , setIsUser ] = useState(false);
     let [isLoading , setIsLoading ] = useState(true )
+
+    let dispatch = useDispatch();   
 
     let getUser = async ()=>{
          setIsLoading(true)
@@ -16,6 +20,7 @@ const AuthWrapper = ({children}) => {
      
         if(data?.result == true ){
             setIsUser(true);
+            dispatch( addUser(data.data ) )
 
         }else{
             setIsUser(false);
